@@ -9,12 +9,12 @@
     <version>1.0.0</version>
     <name>proxy-utils</name>
     <description>动态代理工具包，多种设计模式</description>
-    <url>https://github.com/pqcqaq/threads-utils</url>
+    <url>https://github.com/pqcqaq/proxy-utils</url>
 
     <scm>
-        <url>https://github.com/pqcqaq/threads-utils</url>
-        <connection>scm:git:https://github.com/pqcqaq/threads-utils.git</connection>
-        <developerConnection>scm:git:https://github.com/pqcqaq/threads-utils.git</developerConnection>
+        <url>https://github.com/pqcqaq/proxy-utils</url>
+        <connection>scm:git:https://github.com/pqcqaq/proxy-utils.git</connection>
+        <developerConnection>scm:git:https://github.com/pqcqaq/proxy-utils.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
@@ -60,19 +60,24 @@
         <spring-boot.version>2.7.6</spring-boot.version>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.5</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-web</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.baomidou</groupId>-->
+<!--            <artifactId>mybatis-plus-boot-starter</artifactId>-->
+<!--            <version>3.5.5</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>3.3.0</version>
         </dependency>
     </dependencies>
 
