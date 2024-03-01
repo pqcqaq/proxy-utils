@@ -24,14 +24,19 @@ public class ProxyMethodInterceptor<T> implements MethodInterceptor {
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
         if (handler.containsKey(method)) {
             ProxyMethodHandler[] proxyMethodHandlers = handler.get(method);
-            for (ProxyMethodHandler proxyMethodHandler : proxyMethodHandlers) {
-                proxyMethodHandler.beforeInvoke(method, objects);
-            }
-            Object invoke;
-            invoke = method.invoke(targetInstance, objects);
-            for (int i = proxyMethodHandlers.length - 1; i >= 0; i--) {
-                ProxyMethodHandler proxyMethodHandler = proxyMethodHandlers[i];
-                proxyMethodHandler.afterInvoke(invoke);
+            Object invoke = null;
+            try {
+                for (ProxyMethodHandler proxyMethodHandler : proxyMethodHandlers) {
+                    proxyMethodHandler.beforeInvoke(method, objects);
+                }
+                invoke = method.invoke(targetInstance, objects);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            } finally {
+                for (int i = proxyMethodHandlers.length - 1; i >= 0; i--) {
+                    ProxyMethodHandler proxyMethodHandler = proxyMethodHandlers[i];
+                    proxyMethodHandler.afterInvoke(invoke);
+                }
             }
             return invoke;
         }
@@ -79,6 +84,7 @@ public class ProxyMethodInterceptor<T> implements MethodInterceptor {
 
     /**
      * get the target proxy
+     *
      * @return the target proxy
      */
     public T getTargetProxy() {
@@ -87,9 +93,10 @@ public class ProxyMethodInterceptor<T> implements MethodInterceptor {
 
     /**
      * create a new instance of the class
+     *
      * @param clazz the class of the instance
+     * @param <T>   the type of the instance
      * @return the instance
-     * @param <T> the type of the instance
      */
     public static <T> T newInstance(Class<T> clazz) {
         return new ProxyMethodInterceptor<>(clazz).getTargetProxy();
