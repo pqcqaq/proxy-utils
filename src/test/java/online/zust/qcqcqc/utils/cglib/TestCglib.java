@@ -1,4 +1,4 @@
-package online.zust.qcqcqc.utils;
+package online.zust.qcqcqc.utils.cglib;
 
 import online.zust.qcqcqc.utils.cglib.TransactionInterceptor;
 import online.zust.qcqcqc.utils.cglib.UserService;
